@@ -1,4 +1,4 @@
-package platon
+package response
 
 const (
 	StatusOK = 200
@@ -20,13 +20,13 @@ type ErrorWrapper struct {
 	Data interface{} `json:"data"`
 }
 
-func Response(err ApiError, args ...interface{}) interface{} {
+func Error(err ApiError, args ...interface{}) interface{} {
 	if len(args) == 1 {
 		return ErrorWrapper{err.Code, err.Msg, args[0]}
 	}
 	return ErrorWrapper{err.Code, err.Msg, args}
 }
 
-func ResponseOK(args ...interface{}) interface{} {
-	return Response(ApiError{StatusOK, MsgOK}, args...)
+func Ok(args ...interface{}) interface{} {
+	return Error(ApiError{StatusOK, MsgOK}, args...)
 }
