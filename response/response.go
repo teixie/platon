@@ -1,6 +1,6 @@
 package response
 
-const (
+var (
 	StatusOK = 200
 	MsgOK    = "success"
 )
