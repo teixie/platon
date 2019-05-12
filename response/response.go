@@ -14,7 +14,7 @@ func (e ApiError) Error() string {
 	return e.Msg
 }
 
-type ErrorWrapper struct {
+type errorWrapper struct {
 	Code int         `json:"code"`
 	Msg  string      `json:"msg"`
 	Data interface{} `json:"data"`
@@ -22,9 +22,9 @@ type ErrorWrapper struct {
 
 func Error(err ApiError, args ...interface{}) interface{} {
 	if len(args) == 1 {
-		return ErrorWrapper{err.Code, err.Msg, args[0]}
+		return errorWrapper{err.Code, err.Msg, args[0]}
 	}
-	return ErrorWrapper{err.Code, err.Msg, args}
+	return errorWrapper{err.Code, err.Msg, args}
 }
 
 func Ok(args ...interface{}) interface{} {
