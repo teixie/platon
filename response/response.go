@@ -15,16 +15,15 @@ func (e ApiError) Error() string {
 }
 
 type errorWrapper struct {
-	Code int         `json:"code"`
-	Msg  string      `json:"msg"`
+	ApiError
 	Data interface{} `json:"data"`
 }
 
 func Error(err ApiError, args ...interface{}) interface{} {
 	if len(args) == 1 {
-		return errorWrapper{err.Code, err.Msg, args[0]}
+		return errorWrapper{err, args[0]}
 	}
-	return errorWrapper{err.Code, err.Msg, args}
+	return errorWrapper{err, args}
 }
 
 func Ok(args ...interface{}) interface{} {
